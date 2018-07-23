@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.subte.mati.estadodelsubte.view.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:id="@+id/toolbarContainer">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/toolbarContainer"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                >
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/title"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/black"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/data"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal"
+                    >
+
+                    <TextView
+                        android:id="@+id/textError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="14dp"
+                        android:gravity="center"
+                        android:drawableStart="@drawable/ic_error"
+                        android:drawableEnd="@drawable/ic_error"
+                        android:drawablePadding="12dp"
+                        android:layout_gravity="center_horizontal"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/dataTable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginHorizontal="18dp"
+                        android:layout_marginVertical="8dp"
+                        android:background="@android:color/black"
+                        android:paddingHorizontal="3dp"
+                        android:paddingTop="3dp"
+                        android:layout_gravity="center_horizontal"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/textLastUpdated"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center_horizontal"
+                        />
+
+
+                    <Button
+                        android:id="@+id/updateButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/update"
+                        android:background="@color/transparent"
+                        android:drawableStart="@drawable/ic_update"
+                        android:layout_gravity="center_horizontal"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutUpdating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+
+                    >
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingHorizontal="10sp"
+                        android:text="@string/updating"
+                        android:textColor="@android:color/black" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

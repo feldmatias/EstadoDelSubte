@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Estado del Subte</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="update">Actualizar</string>
+    <string name="updating">Actualizando datos...</string>
+    <string name="title"><u>Estado del Subte</u></string>
+    <string name="notificationsCategory">Recibir Notificaciones</string>
+    <string name="link">https://estadodelsubte.000webhostapp.com/subway/state</string>
+</resources>

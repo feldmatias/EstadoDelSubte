@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "483869402535",
+    "firebase_url": "https://estadodelsubte-209cb.firebaseio.com",
+    "project_id": "estadodelsubte-209cb",
+    "storage_bucket": "estadodelsubte-209cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483869402535:android:642e5775232953fc",
+        "android_client_info": {
+          "package_name": "com.subte.mati.estadodelsubte"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "483869402535-qug4atsf2oj67ujslttfa1kd9aug19f1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa6fyoo27_CLwEl16vFLPPHoAeGBNJLjY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
