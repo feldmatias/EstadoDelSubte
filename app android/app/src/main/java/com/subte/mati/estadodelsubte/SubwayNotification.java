@@ -30,16 +30,13 @@ public class SubwayNotification {
         this.notif = new NotificationCompat.Builder(context, "Subte");
 
         notif.setSmallIcon(R.drawable.ic_notification);
-
         notif.setLargeIcon(this.getLargeIcon(line));
 
-        notif.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
         notif.setContentTitle("Subte " + line);
         notif.setContentText(content);
         notif.setAutoCancel(true);
-        notif.setPriority(Notification.PRIORITY_HIGH);
+        notif.setStyle(new NotificationCompat.BigTextStyle().bigText(content));
         setOpenActivity();
-
     }
 
     private Bitmap getLargeIcon(String line) {
