@@ -59,6 +59,6 @@ public class Subway {
     }
 
     public String getState() {
-        return Html.fromHtml(this.state).toString();
+        return Html.fromHtml(this.state, Html.FROM_HTML_MODE_LEGACY).toString();
     }
 }
