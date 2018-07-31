@@ -14,6 +14,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData() != null) {
             String line = remoteMessage.getData().get("line");
             String state = remoteMessage.getData().get("state");
+            state = Html.fromHtml(state, Html.FROM_HTML_MODE_LEGACY).toString();
             if (this.sendNotification(line)) {
                 SubwayNotification notification = new SubwayNotification(this, line, state);
                 notification.send();
