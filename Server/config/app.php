@@ -104,7 +104,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY', base64_decode('kcQ/btwkDtQGkLgrpqk1r/5qRzuxEJWAcwPKy8Q9rsE=')),
 
     'cipher' => 'AES-256-CBC',
 
@@ -160,6 +160,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Ixudra\Curl\CurlServiceProvider::class,
+
     ],
 
     /*
@@ -208,6 +210,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Curl' => Ixudra\Curl\Facades\Curl::class,
 
     ],
 

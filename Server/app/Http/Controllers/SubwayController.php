@@ -9,8 +9,35 @@ use Ixudra\Curl\Facades\Curl;
 
 class SubwayController extends Controller
 {
+    //From metrovias page
+    /*
+    const url = "https://www.metrovias.com.ar";
+    private function storeNewState($web){
+        $html = HtmlDomParser::str_get_html($web);
+        $subways = Subway::get();
+        foreach ($subways as $subway){
+            $container = 'span[id=status-line-' . $subway->line . ']'; //format == <span id='status-line-A'>State</span>
+            $newState = $html->find($container, 0)->innertext;
+            $subway->store($newState);
+        }
+    }
+    */
 
-	const url = "https://www.metrovias.com.ar/";
+    //From Buenos Aires page
+
+    const url = "https://www.buenosaires.gob.ar/subte";
+    private function storeNewState($web){
+        $html = HtmlDomParser::str_get_html($web);
+
+        $subways = Subway::get();
+        foreach ($subways as $subway){
+            $container = 'div[id=linea' . $subway->line . ']'; //format == <div id="lineaA"> ... <span class="msg">State</span>
+            $infoContainer = 'span[class=msg]';
+            $newState = $html->find($container, 0)->find($infoContainer, 0)->innertext;
+            $subway->store($newState);
+        }
+    }
+
 
     public function getSubwaysState(){
     	$this->check();
@@ -35,13 +62,4 @@ class SubwayController extends Controller
         }
     }
 
-    private function storeNewState($web){
-        $html = HtmlDomParser::str_get_html($web);
-        $subways = Subway::get();
-        foreach ($subways as $subway){
-            $container = 'span[id=status-line-' . $subway->line . ']'; //format == <span id='status-line-A'>State</span>
-            $newState = $html->find($container, 0)->innertext;
-            $subway->store($newState);
-        }
-    }
 }
