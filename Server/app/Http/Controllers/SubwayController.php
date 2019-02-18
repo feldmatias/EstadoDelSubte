@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Subway;
 use Sunra\PhpSimple\HtmlDomParser;
 use Ixudra\Curl\Facades\Curl;
+use Carbon\Carbon;
 
 class SubwayController extends Controller
 {
@@ -51,8 +52,12 @@ class SubwayController extends Controller
         if ($response->status != 200){
             return $this->pageError();
         }
-
-        $this->storeNewState($response->content);
+        
+        try {
+            $this->storeNewState($response->content);   
+        } catch (\Throwable $ex) {
+            $this->pageError();
+        }
     }
 
     private function pageError(){
@@ -60,6 +65,21 @@ class SubwayController extends Controller
         foreach ($subways as $subway){
             $subway->storeError();
         }
+
+        $lastSubway = $subways->last();
+        if ($lastSubway->updated_at < Carbon::now()->subDays(1)){
+            $this->sendErrorMail();
+            $lastSubway->updated_at = Carbon::now();
+            $lastSubway->save();
+        }
+    }
+
+    private function sendErrorMail(){
+        $mail = "feldmatias@gmail.com";
+        $subject = "Estado del subte sin reportar";
+        $message = "El estado del subte no se puede obtener desde hace un dia.";
+        $headers = "From:" . $mail;
+        mail($mail, $subject, $message, $headers);
     }
 
 }
