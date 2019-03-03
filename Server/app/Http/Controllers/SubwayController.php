@@ -34,16 +34,16 @@ class SubwayController extends Controller
         foreach ($subways as $subway){
             $container = 'div[id=linea' . $subway->line . ']'; //format == <div id="lineaA"> ... <span class="msg">State</span>
             $infoContainer = 'span[class=msg]';
-            $newState = $html->find($container, 0)->find($infoContainer, 0)->innertext;
+            $newState = $html->find($container, 0)->find($infoContainer, 0)->plaintext;
             $subway->store($newState);
         }
     }
 
 
+
     public function getSubwaysState(){
-    	$this->check();
-    	$subways = Subway::select('line', 'state', 'error', 'updated_at')->get();
-    	return json_encode($subways);
+        $subways = Subway::select('line', 'state', 'error', 'updated_at')->get();
+        return json_encode($subways);
     }
 
     public function check(){
@@ -58,6 +58,11 @@ class SubwayController extends Controller
         } catch (\Throwable $ex) {
             $this->pageError();
         }
+    }
+
+    public function refresh(){
+        $this->check();
+        return $this->getSubwaysState();
     }
 
     private function pageError(){

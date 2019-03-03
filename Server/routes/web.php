@@ -18,3 +18,5 @@ Route::get('/', function () {
 Route::get('/subway/state', 'SubwayController@getSubwaysState');
 
 Route::get('/subway/check', 'SubwayController@check');
+
+Route::get('/subway/refresh', 'SubwayController@refresh');
