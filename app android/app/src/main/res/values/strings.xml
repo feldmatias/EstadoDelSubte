@@ -5,5 +5,7 @@
     <string name="updating">Actualizando datos...</string>
     <string name="title"><u>Estado del Subte</u></string>
     <string name="notificationsCategory">Recibir Notificaciones</string>
-    <string name="link">https://estadodelsubte.000webhostapp.com/subway/state</string>
+    <string name="firebaseNotificatiosnTopic">all_devices</string>
+    <string name="link_get">https://estadodelsubte.000webhostapp.com/subway/state</string>
+    <string name="link_refresh">https://estadodelsubte.000webhostapp.com/subway/refresh</string>
 </resources>

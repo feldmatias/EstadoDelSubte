@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.content.res.AppCompatResources;
 
@@ -36,6 +35,7 @@ public class SubwayNotification {
         notif.setContentText(content);
         notif.setAutoCancel(true);
         notif.setStyle(new NotificationCompat.BigTextStyle().bigText(content));
+        notif.setDefaults(Notification.DEFAULT_ALL);
         setOpenActivity();
     }
 
@@ -59,6 +59,10 @@ public class SubwayNotification {
 
 
     public void initChannels(Context context) {
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.O) {
+            return;
+        }
+
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         NotificationChannel channel = new NotificationChannel("Subte", "Subte", NotificationManager.IMPORTANCE_HIGH);

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseMessaging.getInstance().subscribeToTopic("all_devices");
+        FirebaseMessaging.getInstance().subscribeToTopic(this.getString(R.string.firebaseNotificatiosnTopic));
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         this.updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.this.startDataRetriever();
+                MainActivity.this.startDataRetriever(true);
             }
         });
     }
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        this.startDataRetriever();
+        this.startDataRetriever(false);
     }
 
     @Override
@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void startDataRetriever(){
+    private void startDataRetriever(boolean refresh){
         if (this.dataRetriever == null || this.dataRetriever.getStatus() == AsyncTask.Status.FINISHED){
-            this.dataRetriever = new DataRetriever(this, progressBar, data, updateButton);
+            this.dataRetriever = new DataRetriever(this, progressBar, data, updateButton, refresh);
             this.dataRetriever.execute();
         }
     }

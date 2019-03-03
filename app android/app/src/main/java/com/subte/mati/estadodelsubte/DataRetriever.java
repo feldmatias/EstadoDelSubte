@@ -13,13 +13,15 @@ public class DataRetriever extends AsyncTask<Void, Void, String>{
     private View updateButton;
     private SubwayDataTable data;
     private String error;
+    private boolean refresh;
 
-    public DataRetriever(Context context, View progressBar, SubwayDataTable data, View updateButton){
+    public DataRetriever(Context context, View progressBar, SubwayDataTable data, View updateButton, boolean refresh){
         this.context = context;
         this.progressBar = progressBar;
         this.data = data;
         this.updateButton = updateButton;
         this.error = "";
+        this.refresh = refresh;
     }
 
     @Override
@@ -27,7 +29,7 @@ public class DataRetriever extends AsyncTask<Void, Void, String>{
         InternetAccess internet = InternetAccess.getInstance();
         String json = "";
         try {
-            json = internet.getJsonFromUrl(context.getString(R.string.link), this.context);
+            json = internet.getJsonFromUrl(context.getString(this.refresh ? R.string.link_refresh : R.string.link_get), this.context);
         } catch (Exception e) {
             this.error = e.getMessage();
         }

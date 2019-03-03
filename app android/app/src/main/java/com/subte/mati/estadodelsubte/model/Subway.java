@@ -5,8 +5,6 @@ import android.text.Html;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -16,12 +14,18 @@ public class Subway {
     private String state;
     private int error;
     private String updated_at;
+    private String status;
 
-    public Subway(String line, String state, int error, String updated_at){
+    private final String status_normal = "normal";
+    private final String status_closed = "closed";
+    private final String status_limited = "limited";
+
+    public Subway(String line, String state, int error, String updated_at, String status){
         this.line = line;
         this.state = state;
         this.error = error;
         this.updated_at = updated_at;
+        this.status = status;
     }
 
     public String getLine(){
@@ -29,11 +33,9 @@ public class Subway {
     }
 
     public int getColor(){
-        String newState = this.state.toLowerCase();
-
-        if (newState.contains("normal") || newState.contains("habitual") || newState.contains("completo")){
+        if (this.status.equals(this.status_normal)){
             return Color.GREEN;
-        } else if (newState.contains("limitado") || newState.contains("demora")){
+        } else if (this.status.equals(this.status_limited)){
             return Color.rgb(239, 127, 26); //Orange
         } else {
             return Color.RED;
