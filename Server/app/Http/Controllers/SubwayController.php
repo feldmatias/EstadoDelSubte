@@ -4,59 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Subway;
+use App\SubwayState\SubwayStateRepository;
 use Sunra\PhpSimple\HtmlDomParser;
-use Ixudra\Curl\Facades\Curl;
 use Carbon\Carbon;
 
 class SubwayController extends Controller
 {
-    //From metrovias page
-    /*
-    const url = "https://www.metrovias.com.ar";
-    private function storeNewState($web){
-        $html = HtmlDomParser::str_get_html($web);
-        $subways = Subway::get();
-        foreach ($subways as $subway){
-            $container = 'span[id=status-line-' . $subway->line . ']'; //format == <span id='status-line-A'>State</span>
-            $newState = $html->find($container, 0)->innertext;
-            $subway->store($newState);
-        }
-    }
-    */
-
-    //From Buenos Aires page
-
-    const url = "https://www.buenosaires.gob.ar/subte";
-    private function storeNewState($web){
-        $html = HtmlDomParser::str_get_html($web);
-
-        $subways = Subway::get();
-        foreach ($subways as $subway){
-            $container = 'div[id=linea' . $subway->line . ']'; //format == <div id="lineaA"> ... <span class="msg">State</span>
-            $infoContainer = 'span[class=msg]';
-            $newState = $html->find($container, 0)->find($infoContainer, 0)->plaintext;
-            $subway->store($newState);
-        }
-    }
-
-
-
+    
     public function getSubwaysState(){
         $subways = Subway::select('line', 'state', 'error', 'updated_at')->get();
         return json_encode($subways);
     }
 
     public function check(){
-        $response = Curl::to(self::url)->returnResponseObject()->get();
+        $states = (new SubwayStateRepository())->getSubwayStates();
 
-        if ($response->status != 200){
-            return $this->pageError();
-        }
-        
-        try {
-            $this->storeNewState($response->content);   
-        } catch (\Throwable $ex) {
+        if (!$states) {
             $this->pageError();
+            return;
+        }
+
+        $subways = Subway::get();
+        foreach ($subways as $subway){
+            if ($state = $states->getSubwayState($subway)) {
+                $subway->store($state->getState());
+            } else {
+                $subway->setNormalState();
+            }
         }
     }
 

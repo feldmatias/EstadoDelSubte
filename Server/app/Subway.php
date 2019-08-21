@@ -16,6 +16,8 @@ class Subway extends Model
     const status_closed = "closed";
     const status_limited = "limited";
 
+    const NORMAL_STATE = "Servicio Normal";
+
     public function store($newState){
         $oldState = $this->state;
 
@@ -60,5 +62,9 @@ class Subway extends Model
         }
         
         return self::status_closed;
+    }
+
+    public function setNormalState() {
+        $this->store(self::NORMAL_STATE);
     }
 }

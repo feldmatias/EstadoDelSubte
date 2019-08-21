@@ -2,6 +2,9 @@
 
 return [
 
+    'buenosAiresClientId' => '*****',
+    'buenosAiresClientSecret' => '*****',
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
